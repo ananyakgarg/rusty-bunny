@@ -24,6 +24,7 @@ fn search(cmd: String) -> Redirect {
         "disc" => String::from("https://https://discord.com/channels/@me"),
         "canv" => String::from("https://canvas.unc.edu"),
         "gm" => String::from("https://mail.google.com"),
+        "cal" => String::from("https://calendar.google.com"),
         _ => utils::google::construct_google_search_url(&cmd)
     };
     
