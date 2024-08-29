@@ -2,15 +2,31 @@
 
 #[macro_use] extern crate rocket;
 
+use rocket::response::Redirect;
+
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
 }
 
 #[get("/search?<cmd>")]
-fn search(cmd: String) -> &'static str {
+fn search(cmd: String) -> Redirect {
     println!("You typed in: {}", cmd);
-    "Hello from search page!"
+    let command = get_command_from_query_string(&cmd);
+
+    let redirect_url = match command {
+        "tw" => String::from("https://twitter.com"),
+        "fb" => String::from("https://facebook.com"),
+        "gh" => String::from("https://github.com"),
+        "li" => String::from("https://linkedin.com"),
+        "chat" => String::from("https://chat.openai.com"),
+        "disc" => String::from("https://https://discord.com/channels/@me"),
+        "canv" => String::from("https://canvas.unc.edu"),
+        "gm" => String::from("https://mail.google.com"),
+        _ => String::from("https://google.com"),
+    };
+    
+    Redirect::to(redirect_url)
 }
 
 fn main() {
@@ -20,7 +36,6 @@ fn main() {
 }
 
 fn get_command_from_query_string(query_string: &str) -> &str {
-    let test = "hello";
     if query_string.contains(' ') {
         let index_of_space = query_string.find(' ').unwrap_or(0);
         return &query_string[..index_of_space];
