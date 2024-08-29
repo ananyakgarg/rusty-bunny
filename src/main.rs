@@ -3,6 +3,7 @@
 #[macro_use] extern crate rocket;
 
 use rocket::response::Redirect;
+mod utils;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -12,7 +13,7 @@ fn index() -> &'static str {
 #[get("/search?<cmd>")]
 fn search(cmd: String) -> Redirect {
     println!("You typed in: {}", cmd);
-    let command = get_command_from_query_string(&cmd);
+    let command = utils::get_command_from_query_string(&cmd);
 
     let redirect_url = match command {
         "tw" => String::from("https://twitter.com"),
@@ -23,7 +24,7 @@ fn search(cmd: String) -> Redirect {
         "disc" => String::from("https://https://discord.com/channels/@me"),
         "canv" => String::from("https://canvas.unc.edu"),
         "gm" => String::from("https://mail.google.com"),
-        _ => String::from("https://google.com"),
+        _ => utils::google::construct_google_search_url(&cmd)
     };
     
     Redirect::to(redirect_url)
