@@ -21,7 +21,7 @@ fn search(cmd: String) -> Redirect {
         "gh" => String::from("https://github.com"),
         "li" => utils::linkedin::construct_linkedin_url(&cmd),
         "chat" => String::from("https://chat.openai.com"),
-        "disc" => String::from("https://https://discord.com/channels/@me"),
+        "disc" => String::from("https://discord.com/invite/5tw9uWwN"),
         "canv" => String::from("https://canvas.unc.edu"),
         "gm" => String::from("https://mail.google.com"),
         "cal" => String::from("https://calendar.google.com"),
