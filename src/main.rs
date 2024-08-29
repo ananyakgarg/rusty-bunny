@@ -19,7 +19,7 @@ fn search(cmd: String) -> Redirect {
         "tw" => String::from("https://twitter.com"),
         "fb" => String::from("https://facebook.com"),
         "gh" => String::from("https://github.com"),
-        "li" => String::from("https://linkedin.com"),
+        "li" => utils::linkedin::construct_linkedin_url(&cmd),
         "chat" => String::from("https://chat.openai.com"),
         "disc" => String::from("https://https://discord.com/channels/@me"),
         "canv" => String::from("https://canvas.unc.edu"),
